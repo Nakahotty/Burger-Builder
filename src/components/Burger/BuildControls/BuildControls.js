@@ -8,7 +8,7 @@ const controls = [
     { label: 'Bacon', type: 'bacon'},
     { label: 'Cheese', type: 'cheese'},
     { label: 'Meat', type: 'meat'},
-];
+]; 
 
 const buildControls = (props) => (
     // за всеки бутон в контролите (масива) генерираме компонент с key и label
@@ -22,6 +22,9 @@ const buildControls = (props) => (
                 lessBtn={() => props.ingredientRemoved(ctrl.type)}
                 disabled={props.disabled[ctrl.type]} /> 
         ))}
+        <button 
+            className={classes.OrderButton}
+            disabled={!props.purchaseable}>ORDER NOW</button>
     </div>
 );
 

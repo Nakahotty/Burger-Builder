@@ -23,7 +23,22 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        totalPrice: 2
+        totalPrice: 2,
+        purchaseable: false
+    }
+
+    updatePurchaseState (ingredients) {
+        // създава масив от ключовете - salad, bacon, cheese... => връщаме стойноста по ключа => събира ги чрез reduce
+        const sum = Object.keys(ingredients) 
+            .map(igKey => {
+                return ingredients[igKey];    
+            })
+            .reduce((sum, el) => {    // reduces to a single number
+                return sum + el;
+            }, 0);
+
+        // ако sum има поне 1 елемент => бургерът е закупуваем
+        this.setState({purchaseable: sum > 0});
     }
 
     addIngredientHandler = (type) => {
@@ -42,6 +57,9 @@ class BurgerBuilder extends Component {
 
          // обновяваме state-a
          this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+         
+         // обновяваме за бутона активен/неактивен
+         this.updatePurchaseState(updatedIngredients);
     }
 
     removeIngredientHandler = (type) => {
@@ -63,6 +81,8 @@ class BurgerBuilder extends Component {
 
         // обновяваме state-a
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+
+        this.updatePurchaseState(updatedIngredients);
     }
 
     render() {
@@ -83,6 +103,7 @@ class BurgerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler} 
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo} 
+                    purchaseable={this.state.purchaseable}
                     price={this.state.totalPrice}/>
             </Aux>
         );
