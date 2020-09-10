@@ -10,3 +10,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+README.md
+how-to-use.txt
+package-lock.json
+yarn.lock
