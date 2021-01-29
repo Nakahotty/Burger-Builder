@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
@@ -109,31 +108,33 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         // alert('You continue!');
-        this.setState({loading: true});
+        // this.setState({loading: true});
 
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice, // in a real app we have to calculate the price
-            customer: {                  // on the server
-                name: 'Atanas Ivanov',
-                address: {
-                    street: 'VARNA MAIKA ST',
-                    zipCode: '9000',
-                    country: 'BG'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'                              
-        }
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice, // in a real app we have to calculate the price
+        //     customer: {                  // on the server
+        //         name: 'Atanas Ivanov',
+        //         address: {
+        //             street: 'VARNA MAIKA ST',
+        //             zipCode: '9000',
+        //             country: 'BG'
+        //         },
+        //         email: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'fastest'                              
+        // }
 
-        axios.post('/orders.json', order)
-            .then(res => {
-                this.setState({loading: false, purchasing: false});
-                console.log(order);
-            })
-            .catch(err => {
-                this.setState({loading: false, purchasing: false});
-            });
+        // axios.post('/orders.json', order)
+        //     .then(res => {
+        //         this.setState({loading: false, purchasing: false});
+        //         console.log(order);
+        //     })
+        //     .catch(err => {
+        //         this.setState({loading: false, purchasing: false});
+        //     });
+
+        this.props.history.push('/checkout');
     }
 
     render() {
